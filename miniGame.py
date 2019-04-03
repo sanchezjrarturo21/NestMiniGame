@@ -47,6 +47,7 @@ introFPS = 10
 endingFPS = 15
 
 #music
+intromusicqueue = 0
 musicqueue = 0
 music = ["opt4.mp3","last10.mp3","startupgame.mp3"]
 
