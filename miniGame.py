@@ -49,7 +49,7 @@ endingFPS = 15
 #music
 intromusicqueue = 0
 musicqueue = 0
-music = ["opt4.mp3","last10.mp3","startupgame.mp3"]
+music = ["startupgame.mp3","opt4.mp3","last10.mp3"]
 
 #for player one
 playeroneX = 25
@@ -241,6 +241,13 @@ runEnding = False
 #intro
 
 while runIntro:
+
+    if musicqueue == 0:
+        pygame.mixer.music.load(music[musicqueue])
+        pygame.mixer.music.play(-1)
+        musicqueue += 1
+
+
     display.set_caption("PRESS RETURN")
     clock.tick(introFPS)
 
@@ -258,6 +265,8 @@ while runIntro:
 
 #main game
 
+musicqueue = 2;
+
 run = True
 while run:
 
@@ -270,12 +279,7 @@ while run:
 
 
 #music queues
-    if musicqueue == 0:
-        pygame.mixer.music.load(music[musicqueue])
-        pygame.mixer.music.play(-1)
-        musicqueue += 1
     if musicqueue == 2:
-        pygame.mixer.music.stop()
         pygame.mixer.music.load(music[musicqueue - 1])
         pygame.mixer.music.play(-1)
         musicqueue += 1
@@ -349,10 +353,10 @@ while run:
     clockTimer -= 1
     if clockTimer == 400:
         print("fasteeer")##replace(stop the other music, play the) faster music
-        musicqueue = 2
+        musicqueue = 4
     if clockTimer == 0:
         print("done") # stop the music
-        musicqueue = 4
+        run = False
 
     animationRefresh()
 ##COIN drop and collection
@@ -410,7 +414,15 @@ runEnding = True
 
 #outro
 
+musicqueue = 0
+
 while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
+
+    if musicqueue == 0:
+        pygame.mixer.music.load(music[musicqueue])
+        pygame.mixer.music.play(-1)
+        musicqueue += 1
+
     display.set_caption("GAME OVER")
     clock.tick(endingFPS)
     win.fill(BLACK)
