@@ -6,19 +6,50 @@ pygame.font.init()
 pygame.mixer.init()
 
 
-#intro and outro stuff
+
+
+
+#colro stuff
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (240, 10, 10)
 YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
-font = pygame.font.SysFont('Comic Sans MS', 72)
+textColor = RED
+def rainbowText():
+    global textColor
+    global RED
+    global BLUE
+    global GREEN
+    global YELLOW
+    global BLACK
+    global WHITE
+
+    if textColor == RED:
+        textColor = BLUE
+    elif textColor == BLUE:
+        textColor = GREEN
+    elif textColor == GREEN:
+        textColor = RED
+
+
+
+#textual stuff for intro and outro
+font = pygame.font.SysFont('Comic Sans MS', 70)
+font2 = pygame.font.SysFont('Comic Sans MS',45 )
+
 introText = font.render("SLIME COLLECTION",True,(BLACK))
-introSubText = font.render("press RETURN to begin",True,(BLACK))
+introSubText = font2.render("press RETURN to begin",True,(BLACK))
 endText = font.render("GAME OVER", True, (WHITE))
 endSubText = font.render("", True, (WHITE))
-endSubSubText = font.render("", True, (WHITE))
+endSubSubText = font.render("", True, (textColor))
+
+player1won = font2.render("RED WINS!", True,(RED))
+player2won = font2.render("BLUE WINS!", True,(BLUE))
+
+
+#idk
 luck = random.randrange(0,1)
 image = pygame.image
 screenWidth = (600,600)
@@ -172,6 +203,10 @@ def rainbowscreen():
 
 
 
+
+
+
+
 def animationRefresh():
     global walkCount1
     global walkCount2
@@ -260,7 +295,8 @@ while runIntro:
 
     rainbowscreen()
     win.fill(screenColor)
-    win.blit(introText, (320 - introText.get_width() // 2, 240 - introText.get_height() // 2))
+    win.blit(introText, (300 - introText.get_width() // 2, 240 - introText.get_height() // 2))
+    win.blit(introSubText, (370 - introText.get_width() // 2, 300 - introText.get_height() // 2))
     display.update()
 
 #main game
@@ -271,7 +307,7 @@ run = True
 while run:
 
     clock.tick(FPS)
-
+    display.set_caption("SLIME COLLECTION")
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -408,7 +444,7 @@ while run:
     textsurface2 = myfont.render(str(player2pts), False, (0, 0, 126))
     win.blit(textsurface2,(525, 60))
 
-    pygame.display.update()
+    display.update()
 
 runEnding = True
 
@@ -417,7 +453,8 @@ runEnding = True
 musicqueue = 0
 
 while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
-
+    rainbowText()
+    itsADraw = font2.render("IT'S A DRAW!", True, (textColor))
     if musicqueue == 0:
         pygame.mixer.music.load(music[musicqueue])
         pygame.mixer.music.play(-1)
@@ -426,17 +463,21 @@ while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
     display.set_caption("GAME OVER")
     clock.tick(endingFPS)
     win.fill(BLACK)
-    win.blit(endText, (320 - endText.get_width() //
+    win.blit(endText, (300 - endText.get_width() //
                        2, 240 - endText.get_height() // 2))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             runEnding = False
     keys = pygame.key.get_pressed()
+    clockTimer -= 1
+    rainbowText()
+    if int(player1pts) > int(player2pts):
+        win.blit(player1won, (440 - introText.get_width() //2, 300 - introText.get_height() // 2))
+    if int(player2pts) > int(player1pts):
+        win.blit(player2won, (440 - introText.get_width() // 2, 300 - introText.get_height() // 2))
+    if int(player1pts) == int(player2pts):
+        win.blit(itsADraw, (440 - introText.get_width() // 2, 300 - introText.get_height() // 2))
 
-    clockTimer -= 2
-    if clockTimer == 2350:
-       win.blit(endSubText, (120 - endSubText.get_width() //
-                             2, 20 - endSubText.get_height() // 2))
     if  keys[pygame.K_RETURN] and clockTimer <= 1500:
         pygame.quit()
     pygame.display.flip()
