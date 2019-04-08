@@ -39,7 +39,7 @@ def rainbowText():
 font = pygame.font.SysFont('Comic Sans MS', 70)
 font2 = pygame.font.SysFont('Comic Sans MS',45 )
 
-introText = font.render("SLIME COLLECTION",True,(BLACK))
+introText = font.render("SAVING PRIVATE SLIME",True,(BLACK))
 introSubText = font2.render("press RETURN to begin",True,(BLACK))
 endText = font.render("GAME OVER", True, (WHITE))
 endSubText = font.render("", True, (WHITE))
@@ -48,6 +48,11 @@ endSubSubText = font.render("", True, (textColor))
 player1won = font2.render("RED WINS!", True,(RED))
 player2won = font2.render("BLUE WINS!", True,(BLUE))
 
+ErickCredit = font2.render("RED WINS!", True, (RED))
+
+ArturoCredit = font2.render("RED WINS!", True, (RED))
+GuillermoCredit = font2.render("RED WINS!", True, (RED))
+JesusCredit = font2.render("RED WINS!", True, (RED))
 
 #idk
 luck = random.randrange(0,1)
@@ -477,7 +482,11 @@ while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
         win.blit(player2won, (440 - introText.get_width() // 2, 300 - introText.get_height() // 2))
     if int(player1pts) == int(player2pts):
         win.blit(itsADraw, (440 - introText.get_width() // 2, 300 - introText.get_height() // 2))
-
-    if  keys[pygame.K_RETURN] and clockTimer <= 1500:
+    if clockTimer == 100:
+        runEnding = False
+    if keys[pygame.K_RETURN] and clockTimer > 1000:
         pygame.quit()
     pygame.display.flip()
+runCredits = True
+#while runCredits:
+
