@@ -48,11 +48,20 @@ endSubSubText = font.render("", True, (textColor))
 player1won = font2.render("RED WINS!", True,(RED))
 player2won = font2.render("BLUE WINS!", True,(BLUE))
 
-ErickCredit = font2.render("RED WINS!", True, (RED))
 
-ArturoCredit = font2.render("RED WINS!", True, (RED))
-GuillermoCredit = font2.render("RED WINS!", True, (RED))
-JesusCredit = font2.render("RED WINS!", True, (RED))
+##CREDITS
+ErickCredit = font.render("ERICK TORRES", True, (RED))
+erick_Text = font2.render("Lead Programmer/ Sprite Designer", True, (WHITE))
+
+ArturoCredit = font.render("ARTURO SANCHEZ", True, (PURPLE))
+arturo_Text = font2.render("Programmer/ Music", True, (WHITE))
+
+MemoText = font.render("GUILLERMO NIEVES", True, (GREEN))
+memo_Text = font2.render("Lead Sprite Designer", True, (WHITE))
+
+JesusCredit = font.render("JESUS RAMOS", True, (BLUE))
+jesus_Text = font2.render("Sound FX", True, (WHITE))
+
 
 #idk
 luck = random.randrange(0,1)
