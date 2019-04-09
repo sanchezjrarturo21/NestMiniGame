@@ -16,6 +16,7 @@ RED = (240, 10, 10)
 YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+PURPLE = (190,10,255)
 textColor = RED
 def rainbowText():
     global textColor
@@ -38,7 +39,7 @@ def rainbowText():
 #textual stuff for intro and outro
 font = pygame.font.SysFont('Comic Sans MS', 70)
 font2 = pygame.font.SysFont('Comic Sans MS',45 )
-
+font3 = pygame.font.SysFont('Comic Sans MS', 58)
 introText = font.render("SAVING PRIVATE SLIME",True,(BLACK))
 introSubText = font2.render("press RETURN to begin",True,(BLACK))
 endText = font.render("GAME OVER", True, (WHITE))
@@ -50,17 +51,65 @@ player2won = font2.render("BLUE WINS!", True,(BLUE))
 
 
 ##CREDITS
-ErickCredit = font.render("ERICK TORRES", True, (RED))
+ErickCredit = font3.render("ERICK TORRES", True, (RED))
+ErickCreditX = 350
+ErickCreditY = -720
 erick_Text = font2.render("Lead Programmer/ Sprite Designer", True, (WHITE))
+erick_TextX = 320
+erick_TextY = -680
 
-ArturoCredit = font.render("ARTURO SANCHEZ", True, (PURPLE))
+ArturoCredit = font3.render("ARTURO SANCHEZ", True, (PURPLE))
+ArturoCreditX = 320
+ArturoCreditY = -660
 arturo_Text = font2.render("Programmer/ Music", True, (WHITE))
+arturo_TextX = 320
+arturo_TextY = -620
 
-MemoText = font.render("GUILLERMO NIEVES", True, (GREEN))
+MemoCredit = font3.render("GUILLERMO NIEVES", True, (GREEN))
+MemoCreditX = 320
+MemoCreditY = -600
 memo_Text = font2.render("Lead Sprite Designer", True, (WHITE))
+memo_TextX = 320
+memo_TextY = -560
 
-JesusCredit = font.render("JESUS RAMOS", True, (BLUE))
+JesusCredit = font3.render("JESUS RAMOS", True, (BLUE))
+JesusCreditX = 400
+JesusCreditY = -540
 jesus_Text = font2.render("Sound FX", True, (WHITE))
+jesus_TextX = 320
+jesus_TextY = -500
+
+
+scrollVel = .5
+def scrollingText():
+    global scrollVel
+    global ErickCreditX
+    global ErickCreditY
+    global erick_TextX
+    global erick_TextY
+    global ArturoCreditX
+    global ArturoCreditY
+    global arturo_TextX
+    global arturo_TextY
+    global MemoCreditX
+    global MemoCreditY
+    global memo_TextX
+    global memo_TextY
+    global JesusCreditX
+    global JesusCreditY
+    global jesus_TextX
+    global jesus_TextY
+
+
+    ErickCreditY += scrollVel
+    erick_TextY += scrollVel
+    ArturoCreditY += scrollVel
+    arturo_TextY += scrollVel
+    MemoCreditY += scrollVel
+    memo_TextY += scrollVel
+    JesusCreditY += scrollVel
+    jesus_TextY += scrollVel
+
 
 
 #idk
@@ -463,7 +512,7 @@ while run:
 runEnding = True
 
 #outro
-
+creditsFPS = 60
 musicqueue = 0
 
 while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
@@ -495,7 +544,24 @@ while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
         runEnding = False
     if keys[pygame.K_RETURN] and clockTimer > 1000:
         pygame.quit()
+    
     pygame.display.flip()
-runCredits = True
-#while runCredits:
 
+runCredits = True
+while runCredits:
+    win.fill(BLACK)
+    screenWidth = (700,400)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            runCredits = False
+    clock.tick(creditsFPS)
+    scrollingText()
+    win.blit(ErickCredit, (ErickCreditX - introText.get_width() // 2, ErickCreditY - introText.get_height() // 2))
+    win.blit(erick_Text, (erick_TextX - introText.get_width() // 2, erick_TextY - introText.get_height() // 2))
+    win.blit(ArturoCredit, (ArturoCreditX - introText.get_width() // 2, ArturoCreditY - introText.get_height() // 2))
+    win.blit(arturo_Text, (arturo_TextX - introText.get_width() // 2, arturo_TextY - introText.get_height() // 2))
+    win.blit(MemoCredit, (MemoCreditX - introText.get_width() // 2, MemoCreditY - introText.get_height() // 2))
+    win.blit(memo_Text, (memo_TextX - introText.get_width() // 2, memo_TextY - introText.get_height() // 2))
+    win.blit(JesusCredit, (JesusCreditX - introText.get_width() // 2, JesusCreditY - introText.get_height() // 2))
+    win.blit(jesus_Text, (jesus_TextX - introText.get_width() // 2, jesus_TextY - introText.get_height() // 2))
+    display.flip()
