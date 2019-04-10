@@ -49,35 +49,40 @@ endSubSubText = font.render("", True, (textColor))
 player1won = font2.render("RED WINS!", True,(RED))
 player2won = font2.render("BLUE WINS!", True,(BLUE))
 
+##Controls
+playerredtext = font3.render("RED'S CONTROLS",True,(RED))
+playerredcontrols = font2.render("Arrow Keys", True,(RED))
+playerbluetext = font3.render("BLUE'S CONTROLS", True,(BLUE))
+playerbluecontrols = font2.render("WASD Keys", True,(BLUE))
 
 ##CREDITS
 ErickCredit = font3.render("ERICK TORRES", True, (RED))
-ErickCreditX = 350
-ErickCreditY = -720
+ErickCreditX = 320
+ErickCreditY = -270
 erick_Text = font2.render("Lead Programmer/ Sprite Designer", True, (WHITE))
 erick_TextX = 320
-erick_TextY = -680
+erick_TextY = -240
 
 ArturoCredit = font3.render("ARTURO SANCHEZ", True, (PURPLE))
 ArturoCreditX = 320
-ArturoCreditY = -660
+ArturoCreditY = -200
 arturo_Text = font2.render("Programmer/ Music", True, (WHITE))
 arturo_TextX = 320
-arturo_TextY = -620
+arturo_TextY = -170
 
 MemoCredit = font3.render("GUILLERMO NIEVES", True, (GREEN))
 MemoCreditX = 320
-MemoCreditY = -600
+MemoCreditY = -130
 memo_Text = font2.render("Lead Sprite Designer", True, (WHITE))
 memo_TextX = 320
-memo_TextY = -560
+memo_TextY = -100
 
 JesusCredit = font3.render("JESUS RAMOS", True, (BLUE))
-JesusCreditX = 400
-JesusCreditY = -540
+JesusCreditX = 320
+JesusCreditY = -60
 jesus_Text = font2.render("Sound FX", True, (WHITE))
 jesus_TextX = 320
-jesus_TextY = -500
+jesus_TextY = -30
 
 
 scrollVel = .5
