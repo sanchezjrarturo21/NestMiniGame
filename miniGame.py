@@ -54,6 +54,7 @@ playerredtext = font3.render("RED'S CONTROLS",True,(RED))
 playerredcontrols = font2.render("Arrow Keys", True,(RED))
 playerbluetext = font3.render("BLUE'S CONTROLS", True,(BLUE))
 playerbluecontrols = font2.render("WASD Keys", True,(BLUE))
+clickReturn = font2.render("Click RETURN when done",True,(WHITE))
 
 ##CREDITS
 ErickCredit = font3.render("ERICK TORRES", True, (RED))
@@ -336,10 +337,24 @@ def animationRefresh():
             boxRight = False
             boxLeft = True
 
-
-
+controlsFPS = 15
+runControls = True
+while runControls:
+    win.fill(BLACK)
+    clock.tick(controlsFPS)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            runControls = False
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RETURN]:
+        runControls = False
+    win.blit(playerredtext,(300 - introText.get_width() // 2, 240 - introText.get_height() // 2))
+    win.blit(playerredcontrols,(300 - introText.get_width() // 2, 280 - introText.get_height() // 2))
+    win.blit(playerbluetext, (300 - introText.get_width() //2, 140 - introText.get_height() // 2))
+    win.blit(playerbluecontrols, (300 - introText.get_width() //2, 180 - introText.get_height() // 2))
+    win.blit(clickReturn, (300 - introText.get_width() //2, 550 - introText.get_height() // 2))
+    display.update()
 runIntro = True
-runEnding = False
 
 #intro
 
@@ -366,6 +381,7 @@ while runIntro:
     win.blit(introText, (300 - introText.get_width() // 2, 240 - introText.get_height() // 2))
     win.blit(introSubText, (370 - introText.get_width() // 2, 300 - introText.get_height() // 2))
     display.update()
+
 
 #main game
 
