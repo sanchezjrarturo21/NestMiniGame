@@ -86,7 +86,7 @@ jesus_TextX = 320
 jesus_TextY = -30
 
 
-scrollVel = .5
+scrollVel = 1
 def scrollingText():
     global scrollVel
     global ErickCreditX
@@ -150,12 +150,18 @@ endingFPS = 15
 intromusicqueue = 0
 musicqueue = 0
 music = ["startupgame.mp3","opt4.mp3","last10.mp3"]
+#jump_sound = pygame.mixer.Sound("jump.mp3")
+#wallhit_sound = pygame.mixer.Sound("wallhit.mp3")
+#coinshoot_sound = pygame.mixer.Sound("coinshoot.mp3")
+
+
 
 #for player one
 playeroneX = 25
 playeroneY = 481
 isJump1 = False
 jumpCount1 = 10
+
 left1 = False
 right1 = False
 walkCount1 = 0
@@ -385,7 +391,7 @@ while runIntro:
 
 #main game
 
-musicqueue = 2;
+musicqueue = 2
 
 run = True
 while run:
@@ -428,6 +434,7 @@ while run:
     if not (isJump1):
         if keys[pygame.K_UP]:
                isJump1 = True
+               #pygame.mixer.Sound.play(jump_sound)
     else:
         if jumpCount1 >= -10:
             playeroneY -= (jumpCount1 * abs(jumpCount1)) * jumpHeight
@@ -455,6 +462,7 @@ while run:
     if not (isJump2):
         if keys[pygame.K_w]:
             isJump2 = True
+            
     else:
 
         if jumpCount2 >= -10:
@@ -565,7 +573,7 @@ while runEnding: #ENDING SCEN WHICH DISPLAYS WINNER and POINTS
         runEnding = False
     if keys[pygame.K_RETURN] and clockTimer > 1000:
         pygame.quit()
-    
+
     pygame.display.flip()
 
 runCredits = True
