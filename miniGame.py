@@ -150,9 +150,9 @@ endingFPS = 15
 intromusicqueue = 0
 musicqueue = 0
 music = ["startupgame.mp3","opt4.mp3","last10.mp3"]
-#jump_sound = pygame.mixer.Sound("jump.mp3")
-#wallhit_sound = pygame.mixer.Sound("wallhit.mp3")
-#coinshoot_sound = pygame.mixer.Sound("coinshoot.mp3")
+jumpSound = pygame.mixer.Sound("jump.wav")
+collisionSound = pygame.mixer.Sound("wallhit.wav")
+shootSound = pygame.mixer.Sound("coinshoot.wav")
 
 
 
@@ -419,7 +419,7 @@ while run:
 
 
 #PLAYER ONE CONTROLS : UP,LEFT,RIGHT
-    if keys[pygame.K_LEFT] and playeroneX > -37:
+    if keys[pygame.K_LEFT] and playeroneX > -35:
         playeroneX -= vel
         left1 = True
         right1 = False
@@ -433,8 +433,9 @@ while run:
         walkCount1 = 0
     if not (isJump1):
         if keys[pygame.K_UP]:
+               jumpSound.play()
                isJump1 = True
-               #pygame.mixer.Sound.play(jump_sound)
+
     else:
         if jumpCount1 >= -10:
             playeroneY -= (jumpCount1 * abs(jumpCount1)) * jumpHeight
@@ -444,16 +445,23 @@ while run:
             jumpCount1 = 10
 
 #PLAYER TWO CONTROLS : W,A,D
-    if keys[pygame.K_a] and playertwoX>-35:
+    if keys[pygame.K_a] and playertwoX>-34:
         playertwoX -= vel
         left2 = True
         right2 = False
-
+    
     if keys[pygame.K_d] and playertwoX<540-width-vel:
         playertwoX += vel
         left2 = False
         right2 = True
-
+    if keys[pygame.K_d] and playertwoX == 515:
+        collisionSound.play()
+    if keys[pygame.K_a] and playertwoX == -34:
+        collisionSound.play()
+    if keys[pygame.K_LEFT] and playeroneX == -38:
+        collisionSound.play()
+    if keys[pygame.K_RIGHT] and playeroneX == 511:
+        collisionSound.play()
 
     else:
         left2 = False
@@ -461,6 +469,7 @@ while run:
         walkCount2 = 0
     if not (isJump2):
         if keys[pygame.K_w]:
+            jumpSound.play()
             isJump2 = True
             
     else:
@@ -495,6 +504,7 @@ while run:
             #generates random num to determine how long before coin drops
             dropTimer = random.randint(30,120)
         if dropNumber <= 1:
+            shootSound.play()
             dropNumber += 1
         if startMovingR == True and coinCollected == False:
             win.blit(coin ,(coinX + 45,coinY + 10))
@@ -535,6 +545,7 @@ while run:
 #player two score card
     textsurface2 = myfont.render(str(player2pts), False, (0, 0, 126))
     win.blit(textsurface2,(525, 60))
+    print(playeroneX,",",playeroneY,"::",playertwoX,",",playertwoY)
 
     display.update()
 
